@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Finn.ai · Startup Guidance</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#14182b;--mu:#6a7090;--ac:#1f6feb;--ac2:#e8f0ff;--bd:#e1e4f0;--ok:#16a34a;--no:#dc2626;--wn:#d97706;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10131f;--card:#191d2e;--tx:#eceffa;--mu:#9aa1c2;--ac:#5b9bff;--ac2:#202a47;--bd:#2a3050}}
+:root[data-theme="dark"]{--bg:#10131f;--card:#191d2e;--tx:#eceffa;--mu:#9aa1c2;--ac:#5b9bff;--ac2:#202a47;--bd:#2a3050}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:14px 18px;background:var(--card);border-bottom:1px solid var(--bd)}
+h1{font-size:18px;margin:0}
+.seg{display:flex;background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:3px}
+.seg button{border:0;background:none;color:var(--mu);padding:7px 14px;border-radius:8px;font:inherit;cursor:pointer}
+.seg button.on{background:var(--ac);color:#fff}
+main{max-width:860px;margin:0 auto;padding:16px}
+.tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:7px 14px;border-radius:20px;font:inherit;cursor:pointer}
+.tabs button.on{background:var(--ac2);border-color:var(--ac);color:var(--ac)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:14px}
+.chat{display:flex;flex-direction:column;gap:8px;max-height:380px;overflow-y:auto;margin-bottom:12px}
+.m{max-width:85%;padding:9px 13px;border-radius:14px;white-space:pre-wrap}
+.m.ai,.m.inv{background:var(--ac2);align-self:flex-start}
+.m.me,.m.fnd{background:var(--ac);color:#fff;align-self:flex-end}
+.row{display:flex;gap:8px}
+input,textarea,select{flex:1;border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:10px;padding:10px;font:inherit;min-width:0}
+button.p{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;cursor:pointer}
+button.p:disabled{opacity:.5;cursor:default}
+button.g{background:none;border:1px solid var(--bd);color:var(--tx);border-radius:10px;padding:8px 14px;font:inherit;cursor:pointer}
+button.ok{background:var(--ok);color:#fff;border:0;border-radius:10px;padding:8px 14px;font:inherit;cursor:pointer}
+button.no{background:var(--no);color:#fff;border:0;border-radius:10px;padding:8px 14px;font:inherit;cursor:pointer}
+.bar{height:8px;background:var(--bd);border-radius:6px;overflow:hidden}.bar i{display:block;height:100%;background:var(--ac)}
+.f{display:grid;grid-template-columns:150px 1fr 30px;gap:8px;align-items:center;font-size:13px;margin:5px 0}
+.tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600}
+.pass{background:#16a34a22;color:var(--ok)}.imp{background:#d9770622;color:var(--wn)}.rej{background:#dc262622;color:var(--no)}
+.mu{color:var(--mu);font-size:13px}.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+ul{margin:4px 0;padding-left:20px}
+.big{font-size:28px;font-weight:700}
+.hide{display:none}
+.hero{background:linear-gradient(135deg,#0b2a5b,#1f6feb);color:#fff;border-radius:16px;padding:22px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+.hero h2{margin:0 0 6px;font-size:22px}.hero p{margin:0 0 12px;opacity:.92;max-width:430px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chips span{background:#ffffff26;border-radius:14px;padding:3px 11px;font-size:12px}
+.hero svg{width:210px;max-width:100%;flex:none}
+.say{padding:2px 10px;font-size:12px;margin-top:6px}
+.av{display:inline-flex;width:28px;height:28px;border-radius:50%;color:#fff;align-items:center;justify-content:center;font-weight:700;font-size:13px;margin-right:8px;vertical-align:middle}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;width:100%}
+.stats div{background:#ffffff1f;border-radius:12px;padding:10px;text-align:center}
+.stats b{display:block;font-size:22px}.stats span{font-size:12px;opacity:.9}.stats .si{font-size:18px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-bottom:14px}
+.step{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.step span{color:var(--mu);font-size:13px}
+.ico{width:44px;height:44px;border-radius:12px;background:var(--ac2);color:var(--ac);display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+.stages{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.stage{border:1px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:12px;padding:8px 12px;font:inherit;cursor:pointer;white-space:nowrap;display:flex;gap:6px}
+.stage.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.inv{border:1px solid var(--bd);border-radius:12px;padding:10px;margin-top:8px;background:var(--bg)}
+.tk{display:flex;gap:8px;align-items:center;padding:6px 0}.tk input{flex:none;width:auto}
+.chips2{display:flex;gap:6px;flex-wrap:wrap}.chips2 .g{font-size:13px;padding:6px 10px}
+.room{border-radius:16px;overflow:hidden;border:1px solid var(--bd);margin-bottom:12px}.room svg{display:block;width:100%;height:auto}
+.jgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:12px}
+.jc{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px;font-size:13px}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}.bob{animation:bob 2.2s ease-in-out infinite}
+@media (prefers-reduced-motion:reduce){.bob{animation:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1 style="display:flex;align-items:center;gap:9px"><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1f6feb"/><path d="M8 22C14 10 18 8 20 5 21 12 24 18 26 22Z" fill="#fff"/><path d="M4 26Q10 22 16 26T28 26" stroke="#cfe3ff" stroke-width="2" fill="none"/></svg>Finn.ai <span style="font-weight:400;color:var(--mu);font-size:14px">· Startup Guidance</span></h1>
+  <div class="seg"><button id="rF" class="on">I’m a Founder</button><button id="rI">I’m an Investor</button></div>
+</header>
+<main>
+  <div id="hero"></div>
+  <div class="tabs" id="tabs"></div>
+  <div id="view"></div>
+  <div class="mu" style="text-align:center;padding:18px">🆓 Free to use.<br>⚡ Powered by Gemini AI</div>
+</main>
+<script>
+const FACTORS=["Market size","Uniqueness","Business model","Traction","Team","Scalability","Capital efficiency"];
+const THRESH=3.2;
+const SYS="You are Finn, the tank’s resident shark: witty, blunt, and fair, with a dry sense of humor and an occasional ocean pun. You are the AI interviewer for Finn.ai, a startup guidance and investor-matching app. A founder is pitching a startup idea to you before any investor sees it. Interview them in a friendly way, using very simple everyday words and no business jargon. Ask ONE short question at a time and only 3 questions in total: 1) what problem does it solve, and for whom; 2) how will it make money, and is there any progress or customers so far; 3) how much money do they want, and how much share will they give. Ask nothing else. Accept short answers and do not push for more detail. Keep each reply under 25 words. After the 3rd answer, say thanks and tell the founder to press the Get AI review button.";
+const LANGS=[["auto","Any language (auto-detect)"],["en-US","English"],["hi-IN","Hindi (हिन्दी)"],["pa-IN","Punjabi (ਪੰਜਾਬੀ)"],["ur-PK","Urdu (اردو)"],["bn-IN","Bengali (বাংলা)"],["ta-IN","Tamil (தமிழ்)"],["te-IN","Telugu (తెలుగు)"],["mr-IN","Marathi (मराठी)"],["gu-IN","Gujarati (ગુજરાતી)"],["es-ES","Spanish (Español)"],["fr-FR","French (Français)"],["de-DE","German (Deutsch)"],["pt-BR","Portuguese (Português)"],["ru-RU","Russian (Русский)"],["ar-SA","Arabic (العربية)"],["zh-CN","Chinese (中文)"],["ja-JP","Japanese (日本語)"],["ko-KR","Korean (한국어)"],["other","Other language…"]];
+let lang="auto",voiceOn=false,customName="",handsFree=false,listening=false,rec=null;
+const langName=()=>lang==="auto"?"the same language the founder is writing or speaking in":lang==="other"?customName:LANGS.find(l=>l[0]===lang)[1];
+const recLang=()=>lang==="auto"||lang==="other"?(navigator.language||"en-US"):lang;
+function speak(t,code,force){
+  if((!force&&!voiceOn&&!handsFree)||!window.speechSynthesis)return;
+  speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/[*#_`]/g,""));u.lang=code||recLang();
+  u.onend=()=>{if(handsFree&&tab==="pitch"&&!draft.review&&!draft.busy)listen()};
+  speechSynthesis.speak(u);
+}
+function mic(){const b=$("#mic");if(b)b.textContent=listening?"⏹ Listening…":"🎤 Speak"}
+function listen(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){alert("Voice input isn’t supported in this browser. Please use Chrome, Edge or Safari.");return}
+  if(listening&&rec){rec.stop();return}
+  if(window.speechSynthesis)speechSynthesis.cancel();
+  rec=new SR();rec.lang=recLang();rec.interimResults=true;rec.continuous=false;
+  rec.onstart=()=>{listening=true;mic()};
+  rec.onend=()=>{listening=false;mic()};
+  rec.onerror=e=>{listening=false;mic();if(e.error==="not-allowed"||e.error==="service-not-allowed")alert("The microphone is blocked here. Allow microphone access for this page, or type your answer instead.")};
+  rec.onresult=e=>{
+    const t=Array.from(e.results).map(r=>r[0].transcript).join("");const i=$("#inp");if(i)i.value=t;
+    if(e.results[e.results.length-1].isFinal)send();
+  };
+  try{rec.start()}catch(e){}
+}
+let S={pitches:[],deals:[]};
+try{const r=localStorage.getItem("vst");if(r)S=JSON.parse(r)}catch(e){}
+let role="F",tab="pitch",draft={msgs:[],busy:false,started:false,review:null},openDeal=null;
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function save(){try{localStorage.setItem("vst",JSON.stringify(S))}catch(e){}}
+
+/* ---------- Gemini Backend Integration ---------- */
+const WORKER_URL = "https://finn-ai-backend.tamishluthra44.workers.dev/";
+
+async function callGemini(promptInput, json = false, task = "general") {
+  let promptStr = promptInput;
+  if (Array.isArray(promptInput)) {
+    promptStr = promptInput.map(m => `${m.role === 'assistant' ? 'AI' : 'User'}: ${m.content}`).join('\n');
+  } else if (typeof promptInput === 'object' && promptInput !== null) {
+    promptStr = JSON.stringify(promptInput);
+  }
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: promptStr, json, task })
+    });
+
+    const resData = await res.json();
+
+    if (!res.ok || resData.ok === false) {
+      throw new Error(resData.error || `Server error: ${res.status}`);
+    }
+
+    if (json) {
+      return resData.data || resData.text;
+    } else {
+      return { text: resData.text || "" };
+    }
+  } catch (err) {
+    console.error("Gemini Worker Error:", err);
+    throw err;
+  }
+}
+
+const sample = async function(promptInput, options) {
+  return await callGemini(promptInput, false, options?.task || "pitch_interview");
+};
+sample.json = async function(promptInput, options) {
+  return await callGemini(promptInput, true, options?.task || "general");
+};
+
+// App data is declared before the first render. Starting the app earlier
+// caused a temporal-dead-zone error when heroHTML() accessed ART.
+let db=null,uid=null,posts=[],dbState="offline",myName="";
+try{myName=localStorage.getItem("vstn")||""}catch(e){}
+async function initDb(){
+  dbState="off";
+  if(tab==="comm")render();
+}
+
+const ART=`<svg viewBox="0 0 220 160" aria-hidden="true"><rect x="20" y="70" width="22" height="50" rx="4" fill="#fff" opacity=".25"/><rect x="52" y="50" width="22" height="70" rx="4" fill="#fff" opacity=".4"/><rect x="84" y="28" width="22" height="92" rx="4" fill="#fff" opacity=".6"/><polyline points="25,60 62,42 95,20 140,10" fill="none" stroke="#7ee787" stroke-width="4" stroke-linecap="round"/><path d="M146 8l-14 1 8 10z" fill="#7ee787"/><path d="M130 122C150 62 168 52 176 38 178 70 190 100 206 122Z" fill="#cfe3ff"/><path d="M0 125Q27 112 55 125T110 125T165 125T220 125V160H0Z" fill="#5b9bff" opacity=".7"/><path d="M0 140Q27 128 55 140T110 140T165 140T220 140V160H0Z" fill="#0b2a5b" opacity=".6"/><circle cx="190" cy="24" r="16" fill="#ffd166"/><text x="190" y="31" text-anchor="middle" font-size="20" font-weight="700" fill="#7a4b00">$</text></svg>`;
+function heroHTML(){
+  const f=role==="F";
+  return `<div class="hero"><div><h2>${f?"Turn your idea into a fundable startup":"Discover pre-screened startups"}</h2><p>${f?"Talk to Finn, our AI shark, in any language. Get an honest score, then meet investors.":"Every idea is interviewed and scored by AI before it reaches you. Review, counter, and close deals."}</p><div class="chips"><span>🎙 Voice pitching</span><span>🤖 AI screening</span><span>🤝 Investor deals</span><span>🌍 Any language</span><span>🆓 Free to use</span><span>⚡ Powered by Gemini</span></div></div>${ART}${statsHTML()}</div>`;
+}
+const empty=m=>`<div class="card mu" style="text-align:center;padding:28px"><svg width="90" height="70" viewBox="0 0 90 70" aria-hidden="true"><path d="M20 55C35 15 45 12 50 4 53 25 62 42 70 55Z" fill="var(--ac2)" stroke="var(--ac)" stroke-width="2"/><path d="M4 62Q20 54 36 62T68 62T90 62" stroke="var(--ac)" stroke-width="3" fill="none"/></svg><div>${m}</div></div>`;
+document.addEventListener("click",e=>{const b=e.target.closest("[data-say]");if(b)speak(decodeURIComponent(b.dataset.say),null,true)});
+$("#rF").onclick=()=>setRole("F");$("#rI").onclick=()=>setRole("I");
+function setRole(r){role=r;tab=r==="F"?"pitch":"feed";openDeal=null;$("#rF").className=r==="F"?"on":"";$("#rI").className=r==="I"?"on":"";render()}
+
+function render(){
+  $("#hero").innerHTML=(tab==="pitch"||tab==="feed")&&!draft.review?heroHTML()+(tab==="pitch"&&!draft.started?stepsHTML():""):"";
+  const tabs=role==="F"?[["pitch","Pitch to Finn"],["room","🎬 Tank room"],["guide","Guidance"],["mine","My pitches"],["comm","Community"],["deals","Deals"]]:[["feed","Investor feed"],["guide","Guidance"],["comm","Community"],["deals","Deals"]];
+  $("#tabs").innerHTML=tabs.map(t=>`<button class="${tab===t[0]?"on":""}" data-t="${t[0]}">${t[1]}</button>`).join("");
+  document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{tab=b.dataset.t;openDeal=null;render()});
+  ({pitch:vPitch,mine:vMine,feed:vFeed,deals:vDeals,comm:vComm,guide:vGuide,room:vRoom})[tab]();
+}
+
+/* ---------- Founder: chat with AI ---------- */
+function history(){
+  const h=draft.msgs.map(m=>({role:m.r==="ai"?"assistant":"user",content:m.t}));
+  if(h.length&&h[0].role==="user")h[0].content=SYS+"\n\nFounder: "+h[0].content;
+  if(h.length)h[h.length-1].content+="\n\n[Reply only in "+langName()+", very short, in simple everyday words, natural for speaking aloud, no markdown or emojis."+(lang==="auto"||lang==="other"?" End with the BCP-47 code of the language you used in double square brackets, like [[hi-IN]].":"")+"]";return h;
+}
+function vPitch(){
+  if(draft.review)return vReview();
+  $("#view").innerHTML=`<div class="card">
+  <div class="mu" style="margin-bottom:8px">Tell Finn about your startup. It will interview you, then score the idea. Only approved ideas reach investors.</div>
+  <div class="row" style="margin-bottom:10px;flex-wrap:wrap;align-items:center"><select id="lg" style="flex:1 1 180px">${LANGS.map(l=>`<option value="${l[0]}" ${l[0]===lang?"selected":""}>${l[0]==="other"&&customName?customName:l[1]}</option>`).join("")}</select><label class="mu"><input type="checkbox" id="vo" style="flex:none;width:auto" ${voiceOn?"checked":""}> Auto-speak replies</label><label class="mu"><input type="checkbox" id="hf" style="flex:none;width:auto" ${handsFree?"checked":""}> Hands-free</label></div>
+  <div class="chat" id="chat"></div>
+  <div class="row"><input id="inp" placeholder="${draft.started?"Your answer…":"Start with your idea in 1–2 lines"}" ${draft.busy?"disabled":""}><button class="g" id="mic" style="flex:none" ${draft.busy?"disabled":""}>🎤 Speak</button><button class="p" id="send" ${draft.busy?"disabled":""}>Send</button></div>
+  <div class="acts"><button class="g" id="rev" ${draft.msgs.filter(m=>m.r==="me").length<4||draft.busy?"disabled":""}>Get AI review</button><button class="g" id="rst">Start over</button></div></div>`;
+  drawChat();
+  $("#send").onclick=send;$("#inp").onkeydown=e=>{if(e.key==="Enter")send()};
+  $("#rev").onclick=review;
+  $("#lg").onchange=e=>{lang=e.target.value;if(lang==="other"){const n=prompt("Which language should the AI use?");if(n)customName=n.trim();else lang="auto"}render()};
+  $("#vo").onchange=e=>{voiceOn=e.target.checked;if(!voiceOn&&window.speechSynthesis)speechSynthesis.cancel()};
+  $("#hf").onchange=e=>{handsFree=e.target.checked};
+  $("#mic").onclick=listen;mic();$("#rst").onclick=()=>{draft={msgs:[],busy:false,started:false,review:null};render()};
+}
+function drawChat(){
+  const c=$("#chat");if(!c)return;c.onclick=ev=>{const b=ev.target.closest("[data-sp]");if(!b)return;const m=draft.msgs[+b.dataset.sp];speak(m.t,m.sl,true)};
+  c.innerHTML=draft.msgs.map((m,i)=>`<div class="m ${m.r}">${m.r==="ai"?FIN:""}${esc(m.t)}${m.r==="ai"?`<br><button class="g" data-sp="${i}" style="padding:2px 10px;font-size:12px;margin-top:6px">🔊 Listen</button>`:""}</div>`).join("")+(draft.busy?`<div class="m ai mu">Finn is typing…</div>`:"");
+  c.scrollTop=c.scrollHeight;
+}
+async function send(){
+  const i=$("#inp"),v=i.value.trim();if(!v||draft.busy)return;
+  draft.msgs.push({r:"me",t:v});draft.started=true;draft.busy=true;render();
+  try{
+    const r=await sample(history(),{task:"pitch_interview"});
+    let tx=r.text,sl=null;const mm=tx.match(/\[\[([A-Za-z-]{2,10})\]\]\s*$/);if(mm){sl=mm[1];tx=tx.replace(mm[0],"").trim()}draft.msgs.push({r:"ai",t:tx,sl});speak(tx,sl)
+  }
+  catch(e){
+    console.error("Finn.ai chat request failed:",e);
+    draft.msgs.push({r:"ai",t:"Finn couldn’t connect to the AI service. Please check your internet connection and try again. Details: "+(e?.message||"Unknown error")});
+  }
+  draft.busy=false;render();
+}
+async function review(){
+  draft.busy=true;render();
+  const tr=draft.msgs.map(m=>(m.r==="ai"?"AI: ":"Founder: ")+m.t).join("\n");
+  const p=`You are a strict but fair startup analyst. Review this founder pitch interview and return ONLY JSON, no markdown:
+{"title":"short startup name","oneLiner":"one sentence","scores":{${FACTORS.map(f=>`"${f}":1-5`).join(",")}},"strengths":["..."],"weaknesses":["..."],"risks":["..."],"askRealistic":"one sentence on whether the ask fits the stage","ask":"amount and equity as stated, or 'not stated'","verdict":"Pass to investors"|"Needs improvement"|"Reject","investorBrief":"3 sentence brief for investors","advice":"one sentence on what to improve"}
+Write every free-text value in ${langName()}, using short sentences and simple everyday words, but keep the JSON keys, the factor names and the verdict values exactly as written in English above. Score honestly from evidence in the transcript; give 1 where nothing was said. Do not promise valuations.
+
+${tr}`;
+  try{
+    const r=await sample.json(p,{task:"pitch_review"});
+    const vals=FACTORS.map(f=>+r.scores[f]||1);r.avg=+(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1);
+    if(r.verdict==="Pass to investors"&&r.avg<THRESH)r.verdict="Needs improvement";
+    draft.review=r;
+  }catch(e){draft.msgs.push({r:"ai",t:"The review failed. Please press Get AI review again."})}
+  draft.busy=false;render();
+}
+function scoreHTML(r){return FACTORS.map(f=>`<div class="f"><span>${f}</span><div class="bar"><i style="width:${(r.scores[f]||1)*20}%"></i></div><b>${r.scores[f]||1}</b></div>`).join("")}
+function vTag(v){return `<span class="tag ${v==="Pass to investors"?"pass":v==="Reject"?"rej":"imp"}">${esc(v)}</span>`}
+function vReview(){
+  const r=draft.review,ok=r.verdict==="Pass to investors";
+  $("#view").innerHTML=`<div class="card"><div class="row" style="justify-content:space-between;align-items:center"><div><h2 style="margin:0">${esc(r.title)}</h2><div class="mu">${esc(r.oneLiner)}</div></div><div class="big">${r.avg}<span class="mu">/5</span></div></div>
+  <p>${vTag(r.verdict)}</p>${scoreHTML(r)}
+  <h4>Strengths</h4><ul>${r.strengths.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+  <h4>Weaknesses</h4><ul>${r.weaknesses.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+  <h4>Risks</h4><ul>${r.risks.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+  <p><b>The ask:</b> ${esc(r.ask)}. ${esc(r.askRealistic)}</p><p><b>To improve:</b> ${esc(r.advice)}</p>
+  <div class="acts">${ok?`<button class="p" id="pub">Send to investors</button>`:""}<button class="g" id="imp">Improve the pitch</button></div></div>`;
+  if(ok)$("#pub").onclick=()=>{S.pitches.push({id:Date.now(),r,transcript:draft.msgs,status:"listed",feedback:[]});save();draft={msgs:[],busy:false,started:false,review:null};tab="mine";render()};
+  $("#imp").onclick=()=>{draft.review=null;render()};
+}
+function vMine(){
+  $("#view").innerHTML=S.pitches.length?S.pitches.map(p=>`<div class="card"><div class="row" style="justify-content:space-between"><b>${esc(p.r.title)}</b><span>${p.r.avg}/5 ${vTag(p.r.verdict)}</span></div><div class="mu">${esc(p.r.oneLiner)}</div>
+  <div style="margin-top:8px">${p.feedback.length?"<b>Investor feedback</b><ul>"+p.feedback.map(f=>`<li>${esc(f)}</li>`).join("")+"</ul>":`<span class="mu">Listed in the investor feed. Waiting for investors.</span>`}</div>${aiHTML(p)}<div class="acts"><button class="p" data-ai="${p.id}" ${aiBusy[p.id]?"disabled":""}>${aiBusy[p.id]?"The investors are thinking…":p.ai?"Re-run AI investors":"🦈 Meet 5 AI investors"}</button><button class="g" data-sh="${p.id}">Share to community</button></div></div>`).join(""):`<div class="card mu">No approved pitches yet. Pitch to the AI first.</div>`;
+  document.querySelectorAll("[data-ai]").forEach(b=>b.onclick=()=>runAI(+b.dataset.ai));
+  document.querySelectorAll("[data-neg]").forEach(b=>b.onclick=()=>{const q=b.dataset.neg.split("|");negotiate(+q[0],q[1])});
+  document.querySelectorAll("[data-sh]").forEach(b=>b.onclick=async()=>{
+    const p=S.pitches.find(x=>x.id===+b.dataset.sh);
+    const n=myName||prompt("Your display name:");if(!n)return;myName=n;try{localStorage.setItem("vstn",n)}catch(e){}
+    posts.unshift({id:Date.now(),name:n,type:"Pitch",text:p.r.oneLiner,ts:Date.now(),likedBy:[],comments:[],pitch:{title:p.r.title,avg:p.r.avg,ask:p.r.ask}});
+    b.textContent="Shared ✓";b.disabled=true;
+  });
+}
+
+/* ---------- Investor feed ---------- */
+function vFeed(){
+  const list=S.pitches.filter(p=>p.status==="listed");
+  $("#view").innerHTML=list.length?list.map(p=>`<div class="card"><div class="row" style="justify-content:space-between;align-items:center"><div>${av(p.r.title)}<b style="font-size:17px">${esc(p.r.title)}</b><div class="mu">${esc(p.r.oneLiner)}</div></div><div class="big">${p.r.avg}</div></div>
+  <p>${esc(p.r.investorBrief)}</p><p class="mu"><b>Ask:</b> ${esc(p.r.ask)}</p>${scoreHTML(p.r)}
+  <details><summary class="mu">Strengths, risks and full pitch</summary><ul>${p.r.strengths.concat(p.r.risks).map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="chat" style="max-height:200px">${p.transcript.map(m=>`<div class="m ${m.r}">${esc(m.t)}</div>`).join("")}</div></details>
+  <div class="acts"><button class="ok" data-a="int" data-id="${p.id}">Interested</button><button class="g" data-a="ctr" data-id="${p.id}">Counter-offer</button><button class="no" data-a="rej" data-id="${p.id}">Not interested</button></div></div>`).join(""):`${empty("No pitches yet. Switch to Founder and pitch an idea; approved pitches appear here.")}`;
+  document.querySelectorAll("[data-a]").forEach(b=>b.onclick=()=>act(b.dataset.a,+b.dataset.id));
+}
+function act(a,id){
+  const p=S.pitches.find(x=>x.id===id);
+  if(a==="rej"){
+    const lowest=FACTORS.slice().sort((x,y)=>p.r.scores[x]-p.r.scores[y])[0];
+    const f=prompt("Main reason for passing? Pick one factor:\n"+FACTORS.join(", "),lowest);if(f===null)return;
+    const note=prompt("Optional note for the founder:","")||"";
+    p.feedback.push("Passed. Main concern: "+f+(note?" — "+note:""));p.status="passed";save();render();return;
+  }
+  let first="I like this idea and I’m interested. Let’s talk about the terms.";
+  if(a==="ctr"){const c=prompt("Your counter-offer (amount, equity, conditions):");if(!c)return;first="Counter-offer: "+c}
+  S.deals.push({id:Date.now(),pid:id,title:p.r.title,ask:p.r.ask,status:"negotiating",msgs:[{from:"inv",t:first}]});
+  p.status="in talks";p.feedback.push("An investor is interested. Check the Deals tab.");save();tab="deals";render();
+}
+
+const FIN=`<svg width="20" height="20" viewBox="0 0 32 32" style="vertical-align:-5px;margin-right:6px" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#1f6feb"/><path d="M8 22C14 10 18 8 20 5 21 12 24 18 26 22Z" fill="#fff"/></svg>`;
+function av(n){n=String(n||"?").trim();let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))%360;return `<span class="av" style="background:hsl(${h} 55% 45%)">${esc((n[0]||"?").toUpperCase())}</span>`}
+const ICO={mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/>',chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',hands:'<circle cx="9" cy="12" r="5"/><circle cx="15" cy="12" r="5"/>',rocket:'<path d="M12 2c4 2 6 6 5 11l-3 3h-4l-3-3C6 8 8 4 12 2zM9 16l-3 4 4-1M15 16l3 4-4-1"/><circle cx="12" cy="9" r="1.5"/>'};
+const ic=k=>`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICO[k]}</svg>`;
+function statsHTML(){
+  const dl=S.deals.length,ag=S.deals.filter(d=>d.status==="agreed").length,av2=S.pitches.length?(S.pitches.reduce((a,p)=>a+p.r.avg,0)/S.pitches.length).toFixed(1):"–";
+  return `<div class="stats">${[["💡",S.pitches.length,"Ideas pitched"],["⭐",av2,"Avg AI score"],["🤝",dl,"Deals started"],["✅",ag,"Deals agreed"]].map(s=>`<div><div class="si">${s[0]}</div><b>${s[1]}</b><span>${s[2]}</span></div>`).join("")}</div>`;
+}
+function stepsHTML(){
+  const s=[["mic","1. Pitch","Speak or type your idea to Finn in any language"],["chart","2. Get scored","Finn scores 7 factors and gives honest feedback"],["hands","3. Meet investors","Approved ideas reach matched investors"],["rocket","4. Grow","Negotiate, close the deal and keep getting guidance"]];
+  return `<div class="steps">${s.map(x=>`<div class="step"><div class="ico">${ic(x[0])}</div><b>${x[1]}</b><span>${x[2]}</span></div>`).join("")}</div>`;
+}
+
+/* ---------- Tank room ---------- */
+const LOOK={kabir:{skin:"#d9a679",hair:"#1c1c1c",suit:"#1f3a68"},tamish:{skin:"#e0b48a",hair:"#4a2f1b",suit:"#8a3b3b",glasses:1},suriya:{skin:"#b9835a",hair:"#161616",suit:"#2f5d50",beard:1},anaya:{skin:"#e2ac84",hair:"#201512",suit:"#7a3b8f",long:1},meera:{skin:"#d6a077",hair:"#3a1f14",suit:"#b4572b",long:1,earr:1}};
+const BR={neutral:["M42 52h12","M66 52h12"],happy:["M42 51q6-4 12-1","M66 50q6-3 12 1"],excited:["M42 47q6-5 12-1","M66 46q6-4 12 1"],skeptical:["M42 55l12-3","M66 47q6-5 12 0"],thinking:["M42 50l12-2","M66 53l12 2"],shocked:["M42 45q6-6 12 0","M66 45q6-6 12 0"],angry:["M42 48l12 5","M78 48l-12 5"]};
+const MO={neutral:'<path d="M52 77h16"/>',happy:'<path d="M50 73q10 11 20 0"/>',excited:'<path d="M49 72q11 15 22 0z" fill="#7a1f1f"/>',skeptical:'<path d="M52 78q8-4 16 1"/>',thinking:'<circle cx="66" cy="77" r="3" fill="#7a1f1f"/>',shocked:'<ellipse cx="60" cy="79" rx="5.5" ry="8" fill="#7a1f1f"/>',angry:'<path d="M50 81q10-8 20 0"/>'};
+function judgeSVG(id,mood,x){
+  const L=LOOK[id],m=BR[mood]?mood:"neutral",big=m==="shocked"?5.5:4.5,px=(m==="skeptical"||m==="thinking")?1.5:0;
+  return `<svg x="${x}" y="70" width="150" height="190" viewBox="0 0 120 150"><g class="${m==="excited"||m==="happy"?"bob":""}">
+  ${L.long?`<path d="M32 62C26 104 34 118 46 118L74 118C86 118 94 104 88 62Z" fill="${L.hair}"/>`:""}
+  <path d="M18 150C18 112 36 100 60 100S102 112 102 150Z" fill="${L.suit}"/><path d="M50 100l10 18 10-18z" fill="#fff"/>
+  <rect x="53" y="82" width="14" height="22" fill="${L.skin}"/><circle cx="60" cy="62" r="26" fill="${L.skin}"/>
+  <path d="M33 60C32 32 88 32 87 60C80 47 40 47 33 60Z" fill="${L.hair}"/>
+  ${L.beard?`<path d="M36 68C38 94 82 94 84 68C76 80 44 80 36 68Z" fill="${L.hair}"/>`:""}
+  ${L.earr?`<circle cx="34" cy="74" r="2.5" fill="#f4c542"/><circle cx="86" cy="74" r="2.5" fill="#f4c542"/>`:""}
+  <circle cx="50" cy="60" r="${big}" fill="#fff"/><circle cx="${50+px}" cy="60" r="2.1" fill="#222"/><circle cx="70" cy="60" r="${big}" fill="#fff"/><circle cx="${70+px}" cy="60" r="2.1" fill="#222"/>
+  ${L.glasses?`<g fill="none" stroke="#222" stroke-width="1.6"><circle cx="50" cy="60" r="8.5"/><circle cx="70" cy="60" r="8.5"/><path d="M58.5 60h3"/></g>`:""}
+  <g fill="none" stroke="#2a1a10" stroke-width="2.6" stroke-linecap="round"><path d="${BR[m][0]}"/><path d="${BR[m][1]}"/></g>
+  <g fill="none" stroke="${L.beard?"#e8c9a8":"#5a1a1a"}" stroke-width="2.4" stroke-linecap="round">${MO[m]}</g></g></svg>`;
+}
+function roomSVG(M){
+  const xs=[15,185,355,525,695],F="font-family=\"system-ui,sans-serif\"";
+  const lamps=xs.map(x=>`<line x1="${x+75}" y1="0" x2="${x+75}" y2="30" stroke="#6b7280"/><path d="M${x+60} 30h30l-8 14h-14z" fill="#d9a441"/><ellipse cx="${x+75}" cy="150" rx="70" ry="120" fill="#ffe7a8" opacity=".07"/>`).join("");
+  return `<svg viewBox="0 0 860 440" role="img" aria-label="Tank room with five judges"><defs><linearGradient id="wl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1b3a"/><stop offset="1" stop-color="#1c3b7a"/></linearGradient><linearGradient id="fl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a3424"/><stop offset="1" stop-color="#1d140e"/></linearGradient></defs>
+  <rect width="860" height="440" fill="url(#wl)"/>${[60,200,340,480,620,760].map(x=>`<rect x="${x}" y="60" width="2" height="226" fill="#fff" opacity=".06"/>`).join("")}
+  <rect x="320" y="12" width="220" height="42" rx="10" fill="#0a1226" stroke="#5b9bff" stroke-width="2"/><text x="430" y="40" text-anchor="middle" ${F} font-size="22" font-weight="800" fill="#9fc4ff">FINN.AI TANK</text>
+  ${lamps}${xs.map((x,i)=>judgeSVG(INV[i].id,M[INV[i].id],x)).join("")}
+  <rect x="0" y="232" width="860" height="54" fill="#2b1d14"/><rect x="0" y="232" width="860" height="8" fill="#6b4a32"/>
+  ${xs.map((x,i)=>`<rect x="${x+25}" y="252" width="100" height="22" rx="4" fill="#0e0a07"/><text x="${x+75}" y="268" text-anchor="middle" ${F} font-size="13" fill="#f4d58d">${INV[i].name.split(" ")[0]}</text>`).join("")}
+  <rect y="286" width="860" height="154" fill="url(#fl)"/><ellipse cx="430" cy="372" rx="190" ry="34" fill="#1f6feb" opacity=".4"/><ellipse cx="430" cy="372" rx="130" ry="22" fill="#0b2a5b" opacity=".6"/>
+  <rect x="395" y="320" width="70" height="86" rx="6" fill="#3a2a1e" stroke="#6b4a32"/><text x="430" y="370" text-anchor="middle" ${F} font-size="16" font-weight="700" fill="#f4d58d">YOU</text><circle cx="430" cy="310" r="7" fill="#111"/><rect x="428" y="314" width="4" height="10" fill="#555"/></svg>`;
+}
+let room={phase:"idle",idea:"",ans:"",J:{},busy:false};
+function jcard(v){
+  const a=room.J[v.id]||{},f=room.phase==="final",inn=a.decision==="IN";
+  let h=`<div class="jc"><b>${v.name.split(" ")[0]}</b> <span class="mu">${v.tag}</span>`;
+  if(room.busy)h+=`<div class="mu">…</div>`;
+  else if(a.say){
+    h+=`<div style="margin:4px 0">“${esc(a.say)}”</div>`;
+    if(room.phase==="ask"&&a.question)h+=`<div class="mu">❓ ${esc(a.question)}</div>`;
+    if(f&&a.decision){
+      h+=`<span class="tag ${inn?"pass":"rej"}">${inn?"IN":"OUT"}</span><div class="mu" style="margin:4px 0">${esc(a.reason||"")}</div>`;
+      if(inn&&a.offer)h+=`<div class="mu">₹${(+a.offer.amount).toLocaleString("en-IN")} for ${esc(a.offer.equity)}%</div><button class="ok say" data-rd="${v.id}">Negotiate</button>`;
+    }
+  }
+  return h+`</div>`;
+}
+function vRoom(){
+  const r=room,M={};INV.forEach(v=>{M[v.id]=r.busy?"thinking":((r.J[v.id]&&r.J[v.id].mood)||"neutral")});
+  const stat={idle:"Tell the judges your idea in a few lines.",ask:"The judges have questions. Answer them in one go.",final:"The judges have decided."}[r.phase];
+  $("#view").innerHTML=`<div class="room">${roomSVG(M)}</div><div class="mu" style="margin:0 0 8px">${r.busy?"The judges are thinking…":stat}</div><div class="jgrid">${INV.map(jcard).join("")}</div>
+  ${r.busy?"":r.phase==="idle"?`<div class="card"><textarea id="ri" rows="3" placeholder="Example: An app that helps farmers sell crops directly to shops…" style="width:100%">${esc(r.idea)}</textarea><div class="acts"><button class="p" id="rgo">🎬 Pitch to the Tank</button></div></div>`:r.phase==="ask"?`<div class="card"><textarea id="rs" rows="3" placeholder="Your answer to the judges…" style="width:100%"></textarea><div class="acts"><button class="p" id="rag">Send answer</button></div></div>`:`<div class="acts"><button class="g" id="rre">Pitch again</button></div>`}`;
+  const g=id=>$(id);
+  if(g("#rgo"))g("#rgo").onclick=roomPitch;
+  if(g("#rag"))g("#rag").onclick=roomAnswer;
+  if(g("#rre"))g("#rre").onclick=()=>{room={phase:"idle",idea:"",ans:"",J:{},busy:false};vRoom()};
+  document.querySelectorAll("[data-rd]").forEach(b=>b.onclick=()=>roomDeal(b.dataset.rd));
+}
+async function roomPitch(){
+  const t=$("#ri").value.trim();if(!t)return;
+  room={phase:"ask",idea:t,ans:"",J:{},busy:true};vRoom();
+  const res=await Promise.allSettled(INV.map(v=>sample.json(`You are ${v.name}, a judge in a virtual Shark Tank room on Finn.ai. ${v.bio} Style: ${v.style} A founder just pitched this idea: "${t}". React like a real judge. Return ONLY JSON: {"mood":"happy"|"excited"|"neutral"|"skeptical"|"thinking"|"shocked"|"angry","say":"your reaction in at most 12 simple words","question":"one simple question for the founder, at most 15 words"}. Pick the mood that truly matches your reaction to this idea and your focus. Use simple everyday words, in the founder's language.`,{task:"tank_room"})));
+  INV.forEach((v,i)=>{const x=res[i];room.J[v.id]=(x.status==="fulfilled"&&x.value&&x.value.say)?x.value:{mood:"neutral",say:"Hmm, tell me more.",question:"Can you explain your idea again?"}});
+  room.busy=false;if(tab==="room")vRoom();
+}
+async function roomAnswer(){
+  const t=$("#rs").value.trim();if(!t)return;
+  room.ans=t;room.busy=true;vRoom();
+  const res=await Promise.allSettled(INV.map(v=>sample.json(`You are ${v.name}, a judge in a virtual Shark Tank room on Finn.ai. ${v.bio} Style: ${v.style} The founder pitched: "${room.idea}". You asked: "${(room.J[v.id]||{}).question||""}". The founder answered all the judges: "${t}". Now react and decide. Return ONLY JSON: {"mood":"happy"|"excited"|"neutral"|"skeptical"|"thinking"|"shocked"|"angry","say":"your reaction in at most 12 simple words","decision":"IN"|"OUT","reason":"1 or 2 short sentences in simple words","offer":{"amount":number in INR,"equity":number in percent,"conditions":"one short sentence"} or null if OUT}. Stay true to your focus and do not say IN to everyone. Use simple everyday words, in the founder's language.`,{task:"tank_room"})));
+  INV.forEach((v,i)=>{const x=res[i];if(x.status==="fulfilled"&&x.value&&x.value.decision)room.J[v.id]=Object.assign({},room.J[v.id],x.value)});
+  room.phase="final";room.busy=false;if(tab==="room")vRoom();
+}
+function roomDeal(id){
+  const a=room.J[id],o=a&&a.offer;if(!o)return;
+  const t=`I’m in. My offer: ₹${(+o.amount).toLocaleString("en-IN")} for ${o.equity}% equity. ${o.conditions||""}`;
+  const d={id:Date.now(),pid:null,title:room.idea.slice(0,40),ask:"Tank room pitch",status:"negotiating",ai:id,msgs:[{from:"inv",t}]};
+  S.deals.push(d);save();tab="deals";openDeal=d.id;render();
+}
+
+/* ---------- AI investors ---------- */
+const INV=[
+ {id:"kabir",name:"Kabir Malhotra",tag:"Fintech & SaaS",bio:"Ex-banker turned angel investor. Invests in fintech, SaaS and B2B software. Obsessed with revenue, margins and clear unit economics.",style:"Direct, numbers-first, a little blunt, pushes for a lower valuation.",ticket:"₹25 lakh to ₹1 crore"},
+ {id:"tamish",name:"Tamish Luthra",tag:"Consumer & D2C",bio:"Built and sold a D2C brand. Invests in consumer apps, D2C, food and lifestyle. Loves brand, retention and viral growth.",style:"Warm and energetic, asks a lot about customers and brand.",ticket:"₹10 lakh to ₹50 lakh"},
+ {id:"suriya",name:"Suriya Raman",tag:"Deeptech, Agri & Climate",bio:"Engineer-investor from Chennai. Backs deeptech, agritech, climate and manufacturing. Patient and product-first.",style:"Calm and thoughtful, asks technical questions and wants a long-term vision.",ticket:"₹30 lakh to ₹1.5 crore"},
+ {id:"anaya",name:"Anaya Rao",tag:"Health & Edtech",bio:"Former doctor and edtech founder. Invests in healthtech, edtech and impact startups. Values founder grit and real user outcomes.",style:"Empathetic but sharp, probes team strength and impact.",ticket:"₹15 lakh to ₹75 lakh"},
+ {id:"meera",name:"Meera Shah",tag:"Marketplaces & B2B",bio:"Operator and former VC associate. Invests in marketplaces, B2B and logistics. Tough on CAC, defensibility and scale.",style:"Tough negotiator, concise, asks for milestones and tranches.",ticket:"₹20 lakh to ₹1 crore"}];
+const aiBusy={},aiBusyD={};
+const invChip=id=>{const v=INV.find(i=>i.id===id);return v?`${av(v.name)}<b>${v.name}</b> on `:""};
+const rm=()=>{if(tab==="mine")vMine()};
+async function runAI(id){
+  const p=S.pitches.find(x=>x.id===id);if(!p||aiBusy[id])return;
+  aiBusy[id]=true;rm();
+  const r=p.r,sum=JSON.stringify({title:r.title,oneLiner:r.oneLiner,ask:r.ask,askRealistic:r.askRealistic,avgScore:r.avg,scores:r.scores,strengths:r.strengths,weaknesses:r.weaknesses,risks:r.risks});
+  const res=await Promise.allSettled(INV.map(v=>sample.json(`You are ${v.name}, an AI angel investor on Finn.ai. ${v.bio} Style: ${v.style} Typical ticket: ${v.ticket}. Evaluate this startup and decide IN or OUT. Be realistic and true to your focus: lean OUT when the sector or stage does not fit you, and do not say IN to everyone. Return ONLY JSON: {"decision":"IN"|"OUT","reason":"2 short sentences in simple words that refer to the scores, risks or market","offer":{"amount":number in INR,"equity":number in percent,"conditions":"one sentence"} or null if OUT,"question":"one simple question in easy words for the founder"}. Write the text fields in the language of the startup summary.\n\nStartup: ${sum}`,{task:"investor_matching"})));
+  p.ai={};res.forEach((x,i)=>{if(x.status==="fulfilled"&&x.value&&x.value.decision)p.ai[INV[i].id]=x.value});
+  aiBusy[id]=false;save();rm();
+}
+function aiHTML(p){
+  if(!p.ai)return "";
+  return `<div style="margin-top:12px"><b>Finn.ai investors</b>${INV.map(v=>{
+    const a=p.ai[v.id],head=`${av(v.name)}<b>${v.name}</b> <span class="mu">${v.tag}</span>`;
+    if(!a)return `<div class="inv"><div>${head}</div><div class="mu">Couldn’t respond. Re-run to try again.</div></div>`;
+    const inn=a.decision==="IN",o=a.offer;
+    return `<div class="inv"><div class="row" style="justify-content:space-between;align-items:center"><span>${head}</span><span class="tag ${inn?"pass":"rej"}">${inn?"IN":"OUT"}</span></div><p style="margin:6px 0">${esc(a.reason)}</p>${inn&&o?`<div class="mu">Offer: <b>₹${(+o.amount).toLocaleString("en-IN")}</b> for <b>${esc(o.equity)}%</b>. ${esc(o.conditions||"")}</div>`:""}<div class="mu">Question: ${esc(a.question||"")}</div>${inn&&o?`<div class="acts" style="margin-top:8px"><button class="ok" data-neg="${p.id}|${v.id}">Negotiate with ${v.name.split(" ")[0]}</button></div>`:""}</div>`;
+  }).join("")}</div>`;
+}
+function negotiate(pid,iid){
+  const p=S.pitches.find(x=>x.id===pid),a=p&&p.ai&&p.ai[iid];if(!a||!a.offer)return;
+  const ex=S.deals.find(d=>d.pid===pid&&d.ai===iid);if(ex){tab="deals";openDeal=ex.id;render();return}
+  const o=a.offer,t=`I’m in. My offer: ₹${(+o.amount).toLocaleString("en-IN")} for ${o.equity}% equity. ${o.conditions||""} ${a.question||""}`;
+  const d={id:Date.now(),pid,title:p.r.title,ask:p.r.ask,status:"negotiating",ai:iid,msgs:[{from:"inv",t}]};
+  S.deals.push(d);save();tab="deals";openDeal=d.id;render();
+}
+async function aiReply(d){
+  const v=INV.find(i=>i.id===d.ai);if(!v)return;
+  aiBusyD[d.id]=true;if(tab==="deals")render();
+  const chat=d.msgs.map(m=>(m.from==="fnd"?"Founder: ":v.name+": ")+m.t).join("\n");
+  const q=`You are ${v.name}, an AI angel investor on Finn.ai. ${v.bio} Style: ${v.style} You are negotiating with a founder about "${d.title}". Their ask: ${d.ask}. Reply as ${v.name}: stay in character, under 70 words, in the founder's language. You may hold, improve or lower your offer based on their arguments, but stay realistic and never promise returns. Return ONLY JSON: {"text":"your reply","status":"continue"|"agree"|"walk"}. Use "agree" only when both sides clearly settled on terms, and "walk" only if the talks are clearly dead.\n\nChat so far:\n${chat}`;
+  try{
+    const r=await sample.json(q,{task:"deal_assistant"});d.msgs.push({from:"inv",t:r.text});
+    if(d.status==="negotiating"){if(r.status==="agree")d.status="agreed";else if(r.status==="walk")d.status="closed"}
+  }catch(e){d.msgs.push({from:"inv",t:v.name.split(" ")[0]+" is unavailable right now. Please try again."})}
+  aiBusyD[d.id]=false;save();if(tab==="deals")render();
+}
+
+/* ---------- Guidance ---------- */
+const STAGES=[
+ {n:"Idea",e:"💡",why:"Make the problem sharp before you build anything.",tips:["Write the problem in one sentence","Name who has it and how they cope today","List 3 existing alternatives and why they fall short"]},
+ {n:"Validate",e:"🔍",why:"Prove people care before spending money.",tips:["Talk to 10 target customers","Ask what they already pay for this problem","Get 3 people to pre-commit or join a waitlist"]},
+ {n:"Build MVP",e:"🛠",why:"Ship the smallest thing that solves the core job.",tips:["Cut features down to one core job","Ship a first version in under 8 weeks","Pick one key metric to track"]},
+ {n:"Launch",e:"🚀",why:"Get real users and learn fast.",tips:["Get your first 10 active or paying users","Collect 3 testimonials","Track retention every week"]},
+ {n:"Raise",e:"💰",why:"Investors fund traction, a clear market and a strong team.",tips:["Prepare a 10-slide deck","Know your numbers: revenue, CAC, runway","Pitch to Finn and improve from the feedback"]}];
+const DECK=["Problem","Solution","Product demo","Market size","Business model","Traction","Competition","Go-to-market plan","Team","The ask and use of funds"];
+let gStage=0,gAns="",gBusy=false,gQ="";
+async function askG(q){
+  if(!q||gBusy)return;
+  gQ=q;gBusy=true;gAns="";vGuide();
+  try{
+    const r=await sample("You are Finn, a friendly, practical startup mentor. Answer in the same language as the question, in under 100 words, using simple everyday words and 3 to 4 short steps. Do not promise funding outcomes. For legal or tax topics, say to confirm with a qualified professional.\n\nQuestion: "+q,{task:"startup_guidance"});
+    gAns=r.text.replace(/[*#]/g,"")
+  }
+  catch(e){gAns="Sorry, Finn couldn’t answer. Please try again."}
+  gBusy=false;vGuide();
+}
+function vGuide(){
+  S.guide=S.guide||{done:{}};
+  const tot=STAGES.reduce((a,s)=>a+s.tips.length,0),dn=Object.keys(S.guide.done).filter(k=>S.guide.done[k]).length,pc=Math.round(dn/tot*100),st=STAGES[gStage];
+  $("#view").innerHTML=`<div class="card"><div class="row" style="justify-content:space-between;align-items:center"><b>Your startup roadmap</b><span class="mu">${pc}% complete</span></div><div class="bar" style="margin:8px 0 14px"><i style="width:${pc}%"></i></div>
+  <div class="stages">${STAGES.map((s,i)=>`<button class="stage ${i===gStage?"on":""}" data-st="${i}"><span>${s.e}</span>${s.n}</button>`).join("")}</div>
+  <h3 style="margin:14px 0 4px">${st.e} ${st.n}</h3><div class="mu" style="margin-bottom:6px">${st.why}</div>
+  ${st.tips.map((t,i)=>`<label class="tk"><input type="checkbox" data-tk="${gStage}-${i}" ${S.guide.done[gStage+"-"+i]?"checked":""}> ${t}</label>`).join("")}</div>
+  <div class="card"><b>${FIN}Ask Finn anything about your startup</b><div class="mu" style="margin:4px 0 8px">Funding, pricing, legal basics, hiring, marketing, in any language.</div>
+  <div class="chips2">${["How do I validate my idea cheaply?","How much equity should I give an investor?","How do I find my first 100 customers?","What should I say in a 2-minute pitch?"].map(q=>`<button class="g" data-q="${esc(q)}">${esc(q)}</button>`).join("")}</div>
+  <div class="row" style="margin-top:10px"><input id="gq" placeholder="Type your question…" value="${esc(gQ)}"><button class="p" id="ga" ${gBusy?"disabled":""}>Ask</button></div>
+  ${gBusy?`<p class="mu">Finn is typing…</p>`:gAns?`<div class="m ai" style="max-width:100%;margin-top:10px">${FIN}${esc(gAns)}<br><button class="g say" data-say="${encodeURIComponent(gAns)}">🔊 Listen</button></div>`:""}</div>
+  <div class="card"><b>📑 10-slide pitch deck outline</b><ol class="mu">${DECK.map(x=>`<li>${x}</li>`).join("")}</ol></div>`;
+  document.querySelectorAll("[data-st]").forEach(b=>b.onclick=()=>{gStage=+b.dataset.st;vGuide()});
+  document.querySelectorAll("[data-tk]").forEach(c=>c.onchange=()=>{S.guide.done[c.dataset.tk]=c.checked;save();vGuide()});
+  document.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>askG(b.dataset.q));
+  $("#ga").onclick=()=>askG($("#gq").value.trim());
+  $("#gq").onkeydown=e=>{if(e.key==="Enter")askG($("#gq").value.trim())};
+}
+
+/* ---------- Community ---------- */
+const TYPES=["Feedback","Question","Win","Co-founder wanted"];
+function ago(t){const m=Math.max(1,Math.round((Date.now()-t)/60000));return m<60?m+"m":m<1440?Math.round(m/60)+"h":Math.round(m/1440)+"d"}
+function vComm(){
+  $("#view").innerHTML=`<div class="card"><b>The Tank Community</b><div class="mu" style="margin-bottom:10px">Founders and investors share pitches, ask questions, find co-founders and celebrate wins. Community storage runs locally on this device.</div>
+  <div class="row" style="margin-bottom:8px"><input id="cn" placeholder="Your display name" value="${esc(myName)}"><select id="ct" style="flex:none">${TYPES.map(t=>`<option>${t}</option>`).join("")}</select></div>
+  <textarea id="cx" rows="3" placeholder="Share something with the community…" style="width:100%"></textarea>
+  <div class="acts"><button class="p" id="cp">Post</button></div></div>
+  ${posts.length?posts.map(p=>{const liked=(p.likedBy||[]).includes("local"),cm=p.comments||[];return `<div class="card"><div class="row" style="justify-content:space-between"><span>${av(p.name)}<b>${esc(p.name)}</b> <span class="tag imp">${esc(p.type)}</span></span><span class="mu">${ago(p.ts)} ago</span></div>
+  ${p.pitch?`<div style="margin-top:8px"><b style="font-size:17px">${esc(p.pitch.title)}</b> <span class="tag pass">AI score ${esc(p.pitch.avg)}/5</span><div class="mu">Ask: ${esc(p.pitch.ask)}</div></div>`:""}
+  <p style="white-space:pre-wrap">${esc(p.text)}</p><button class="g say" style="margin:0 0 8px" data-say="${encodeURIComponent(p.text)}">🔊 Listen</button>
+  <div class="acts" style="margin:0"><button class="g" data-lk="${p.id}">${liked?"🔥 Liked":"🔥 Like"} ${(p.likedBy||[]).length}</button></div>
+  ${cm.map(c=>`<div class="mu" style="margin-top:8px"><b>${esc(c.n)}:</b> ${esc(c.t)}</div>`).join("")}
+  <div class="row" style="margin-top:10px"><input id="c_${p.id}" placeholder="Write a comment…"><button class="g" data-cm="${p.id}">Reply</button></div></div>`}).join(""):`<div class="card mu">No posts yet. Be the first to post.</div>`}`;
+  const name=()=>{const n=$("#cn").value.trim();if(!n){alert("Please enter a display name.");return null}myName=n;try{localStorage.setItem("vstn",n)}catch(e){}return n};
+  $("#cp").onclick=()=>{const t=$("#cx").value.trim(),n=t&&name();if(!t||!n)return;
+    posts.unshift({id:Date.now(),name:n,type:$("#ct").value,text:t,ts:Date.now(),likedBy:[],comments:[],pitch:null});
+    save();vComm();
+  };
+  document.querySelectorAll("[data-lk]").forEach(b=>b.onclick=()=>{
+    const p=posts.find(x=>x.id===+b.dataset.lk);if(!p)return;const L=p.likedBy||[];
+    p.likedBy=L.includes("local")?L.filter(x=>x!=="local"):[...L,"local"];
+    save();vComm();
+  });
+  document.querySelectorAll("[data-cm]").forEach(b=>b.onclick=()=>{
+    const p=posts.find(x=>x.id===+b.dataset.cm),i=$("#c_"+b.dataset.cm),t=i.value.trim();if(!p||!t)return;
+    const n=myName||prompt("Your display name:");if(!n)return;myName=n;try{localStorage.setItem("vstn",n)}catch(e){}
+    p.comments=p.comments||[];p.comments.push({n,t,ts:Date.now()});
+    save();vComm();
+  });
+}
+
+/* ---------- Deals ---------- */
+function vDeals(){
+  if(openDeal){
+    const d=S.deals.find(x=>x.id===openDeal),mine=role==="F"?"fnd":"inv";
+    $("#view").innerHTML=`<button class="g" id="back">← All deals</button><div class="card" style="margin-top:10px">${d.ai?invChip(d.ai):""}<b>${esc(d.title)}</b> <span class="tag ${d.status==="agreed"?"pass":d.status==="closed"?"rej":"imp"}">${d.status}</span><div class="mu">Original ask: ${esc(d.ask)}</div>
+    <div class="chat" id="dc" style="margin-top:10px">${d.msgs.map(m=>`<div class="m ${m.from===mine?"me":m.from}">${esc(m.t)}<br><button class="g say" data-say="${encodeURIComponent(m.t)}">🔊 Listen</button></div>`).join("")}${aiBusyD[d.id]?`<div class="m inv mu">${(INV.find(i=>i.id===d.ai)||{name:"Investor"}).name.split(" ")[0]} is typing…</div>`:""}</div>
+    ${d.status==="negotiating"?`<div class="row"><input id="di" placeholder="Reply as ${role==="F"?"founder":"investor"}…"><button class="p" id="ds">Send</button></div>
+    <div class="acts"><button class="ok" id="ac">Accept terms</button><button class="no" id="wk">Walk away</button></div>`:""}
+    ${d.status==="agreed"?`<div class="card" style="background:var(--ac2);margin:12px 0 0"><b>🤝 Collaboration workspace open</b><ul><li>Sign the legal agreement outside the app</li><li>Set 30/60/90-day milestones</li><li>Schedule a kickoff meeting</li></ul><span class="mu">This prototype records the deal. Legal paperwork and money transfer happen off-platform.</span></div>`:""}</div>`;
+    $("#back").onclick=()=>{openDeal=null;render()};
+    const c=$("#dc");c.scrollTop=c.scrollHeight;
+    if(d.status==="negotiating"){
+      const s=()=>{const v=$("#di").value.trim();if(!v)return;d.msgs.push({from:mine,t:v});save();render();if(d.ai&&mine==="fnd")aiReply(d)};
+      $("#ds").onclick=s;$("#di").onkeydown=e=>{if(e.key==="Enter")s()};
+      $("#ac").onclick=()=>{d.status="agreed";d.msgs.push({from:mine,t:"I accept the terms. Deal!"});save();render()};
+      $("#wk").onclick=()=>{d.status="closed";d.msgs.push({from:mine,t:"I’m walking away from this deal."});save();render()};
+    }
+    return;
+  }
+  $("#view").innerHTML=S.deals.length?S.deals.map(d=>`<div class="card" style="cursor:pointer" data-d="${d.id}"><div class="row" style="justify-content:space-between"><b>${esc(d.title)}</b><span class="tag ${d.status==="agreed"?"pass":d.status==="closed"?"rej":"imp"}">${d.status}</span></div><div class="mu">${esc(d.msgs[d.msgs.length-1].t)}</div></div>`).join(""):`${empty("No deals yet. They appear when an investor shows interest.")}`;
+  document.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{openDeal=+b.dataset.d;render()});
+}
+// Start only after every const/let value and app function is initialized.
+// This also ensures Founder/Investor switching can render immediately.
+render();
+initDb();
+</script>
+</body>
+</html>
